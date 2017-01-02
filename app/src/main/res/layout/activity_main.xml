@@ -7,7 +7,7 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="io.github.reiiyuki.findmything.models.MainActivity">
+        tools:activity="io.github.reiiyuki.findmything.models.MainActivity">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
