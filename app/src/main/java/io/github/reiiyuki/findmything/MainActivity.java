@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     SensorManager sensorManager;
     Sensor sensor;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
