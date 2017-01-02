@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements Observer{
             Location location = LocationEngine.getInstance().getCurrentLocation();
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
-            binding.currentLocationText.setText(String.format("Latitude = %f, Lontitude = %f",latitude,longitude));
+            binding.currentLocationText.setText(String.format("(%f,%f)",latitude,longitude));
         }
     }
 }
