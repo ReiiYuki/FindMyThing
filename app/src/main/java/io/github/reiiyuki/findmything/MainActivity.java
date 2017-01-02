@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     SensorManager sensorManager;
     Sensor sensor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         textView = (TextView) findViewById(R.id.loc);
         gyText = (TextView) findViewById(R.id.gy);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
 
@@ -134,8 +133,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
         float y = event.values[1];
-        float z = event.values[2];
-        gyText.setText(String.format("X = %s rad/s\nY = %s rad/s\nZ = %s rad/s",x,y,z));
+        float z = event.values[2]*180/10;
+
+        gyText.setText(String.format("X = %f \nY = %f \nZ = %f ",x,y,z));
     }
 
     @Override
