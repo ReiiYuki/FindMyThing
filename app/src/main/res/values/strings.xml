@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">FindMyThing</string>
+    <string name="app_name">Find My Thing</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="current_location_text">Current Location Text</string>
 </resources>

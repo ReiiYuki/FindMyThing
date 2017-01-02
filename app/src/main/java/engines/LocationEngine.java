@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -16,11 +17,13 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.Observable;
+
 /**
  * Created by yukir on 1/3/2017.
  */
 
-public class LocationEngine implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class LocationEngine extends Observable implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private Location currentLocation;
     private GoogleApiClient apiClient;
     private Activity activity;
@@ -64,6 +67,8 @@ public class LocationEngine implements GoogleApiClient.ConnectionCallbacks, Goog
     @Override
     public void onLocationChanged(Location location) {
         currentLocation = location;
+        setChanged();
+        notifyObservers();
     }
 
     public Location getCurrentLocation(){
@@ -93,7 +98,8 @@ public class LocationEngine implements GoogleApiClient.ConnectionCallbacks, Goog
         if (locationAvailability.isLocationAvailable()) {
             LocationRequest locationRequest = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(10);
+                    .setInterval(1000)
+                    .setFastestInterval(500);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         } else {
             Toast.makeText(activity, "Location Service is not available!", Toast.LENGTH_LONG).show();
