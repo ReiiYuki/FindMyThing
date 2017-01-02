@@ -1,22 +1,42 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
     tools:activity="ui.fragments.HomeFragment"
         >
-
-    <TextView
-        android:gravity="center"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/current_location_text"
-        android:id="@+id/current_location_text"/>
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:id="@+id/test">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_location_text"
+            android:minHeight="@android:dimen/app_icon_size"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:id="@+id/current_location_text"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Thing"
+            android:layout_alignParentRight="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@drawable/ic_plusone_medium_off_client"
+            app:layout_anchor="@id/test"
+            app:layout_anchorGravity="bottom|right|end"/>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
 
