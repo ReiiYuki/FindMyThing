@@ -12,8 +12,8 @@ public class Thing extends RealmObject{
     private int id;
     private String name;
     private String description;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
     public String getDescription() {
         return description;
@@ -39,7 +39,7 @@ public class Thing extends RealmObject{
         this.name = name;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -47,7 +47,7 @@ public class Thing extends RealmObject{
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
