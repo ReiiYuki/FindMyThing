@@ -24,11 +24,11 @@ public class LocationEngine implements GoogleApiClient.ConnectionCallbacks, Goog
     private Location currentLocation;
     private GoogleApiClient apiClient;
     private Activity activity;
-    private LocationEngine locationEngine;
+    private static LocationEngine locationEngine;
 
     private LocationEngine(){}
 
-    public LocationEngine getInstance(){
+    public static LocationEngine getInstance(){
         if (locationEngine==null) locationEngine = new LocationEngine();
         return  locationEngine;
     }
@@ -93,7 +93,7 @@ public class LocationEngine implements GoogleApiClient.ConnectionCallbacks, Goog
         if (locationAvailability.isLocationAvailable()) {
             LocationRequest locationRequest = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(5000);
+                    .setInterval(10);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         } else {
             Toast.makeText(activity, "Location Service is not available!", Toast.LENGTH_LONG).show();

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import engines.LocationEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.ActivityMainBinding;
 import ui.fragments.HomeFragment;
@@ -17,11 +18,13 @@ public class MainActivity extends AppCompatActivity  {
     private Fragment homeFragment;
     private Intent intent;
     private FragmentTransaction transaction;
+    private LocationEngine locationEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDataBinding();
+        setupLocationEngine();
         initIntent();
         initFragment();
         initTransaction();
@@ -48,4 +51,23 @@ public class MainActivity extends AppCompatActivity  {
         transaction.replace(R.id.fragment_frame,homeFragment);
         transaction.commit();
     }
+
+    private void setupLocationEngine(){
+        locationEngine = LocationEngine.getInstance();
+        locationEngine.setActivity(this);
+        locationEngine.buildApi();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        locationEngine.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        locationEngine.disconnect();
+    }
+
 }
