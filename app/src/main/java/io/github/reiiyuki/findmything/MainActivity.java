@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     SensorManager sensorManager;
     Sensor sensor;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
-        float y = event.values[1];
+        float x = event.values[0]*180/10;
+        float y = event.values[1]*180/10;
         float z = event.values[2]*180/10;
 
         gyText.setText(String.format("X = %f \nY = %f \nZ = %f ",x,y,z));
