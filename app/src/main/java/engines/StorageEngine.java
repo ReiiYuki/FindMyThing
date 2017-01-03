@@ -12,14 +12,14 @@ import models.Thing;
 
 public class StorageEngine {
 
-    private StorageEngine engine;
+    private static StorageEngine engine;
     private Realm realm;
 
     private StorageEngine(){
 
     }
 
-    public StorageEngine getInstance(){
+    public static StorageEngine getInstance(){
         if (engine==null) engine = new StorageEngine();
         return  engine;
     }

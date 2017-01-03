@@ -16,6 +16,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import engines.LocationEngine;
+import engines.StorageEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.DialogAddThingBinding;
 import io.github.reiiyuki.findmything.databinding.FragmentHomeBinding;
@@ -63,7 +64,7 @@ public class HomeFragment extends Fragment implements Observer{
 
     private void showAddThingDialogBox(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        DialogAddThingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.dialog_add_thing,null,false);
+        final DialogAddThingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.dialog_add_thing,null,false);
         builder.setView(binding.getRoot())
             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
@@ -74,7 +75,8 @@ public class HomeFragment extends Fragment implements Observer{
             .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
+                    String name = binding.thingNameText.getText().toString();
+//                    StorageEngine
                 }
             });
         builder.create().show();
