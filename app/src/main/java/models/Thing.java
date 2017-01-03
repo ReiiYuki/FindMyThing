@@ -9,7 +9,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class Thing extends RealmObject{
     @PrimaryKey
-    private int id;
+    private long id;
     private String name;
     private String description;
     private double latitude;
@@ -23,11 +23,11 @@ public class Thing extends RealmObject{
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class Thing extends RealmObject{
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -51,7 +51,7 @@ public class Thing extends RealmObject{
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }
