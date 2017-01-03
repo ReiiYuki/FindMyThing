@@ -8,7 +8,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="What's your thing called ?"
+            android:hint="@string/what_thing_name"
             android:lines="1"
             android:maxLines="1"
             android:textAlignment="center"
