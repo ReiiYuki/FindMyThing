@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -76,7 +77,8 @@ public class HomeFragment extends Fragment implements Observer{
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String name = binding.thingNameText.getText().toString();
-//                    StorageEngine
+                    StorageEngine.getInstance().addThing(name);
+                    Toast.makeText(getContext(),StorageEngine.getInstance().getThings().size(),Toast.LENGTH_LONG);
                 }
             });
         builder.create().show();

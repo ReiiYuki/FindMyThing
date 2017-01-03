@@ -16,7 +16,7 @@ public class StorageEngine {
     private Realm realm;
 
     private StorageEngine(){
-
+        realm = Realm.getDefaultInstance();
     }
 
     public static StorageEngine getInstance(){
