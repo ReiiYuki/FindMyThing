@@ -28,12 +28,13 @@ public class StorageEngine {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Thing thing = realm.createObject(Thing.class);
+                Thing thing = new Thing();
                 Location location = LocationEngine.getInstance().getCurrentLocation();
                 thing.setName(name);
                 thing.setLatitude(location.getLatitude());
                 thing.setLongitude(location.getLongitude());
                 thing.setId(getThings().size()+System.currentTimeMillis());
+                realm.copyToRealm(thing);
             }
         });
     }
