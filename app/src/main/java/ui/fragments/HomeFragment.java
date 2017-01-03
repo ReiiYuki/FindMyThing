@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.Observable;
 import java.util.Observer;
 
+import adapters.ThingListAdapter;
 import engines.LocationEngine;
 import engines.StorageEngine;
 import io.github.reiiyuki.findmything.R;
@@ -92,6 +93,6 @@ public class HomeFragment extends Fragment implements Observer{
     }
     private void setupRecyclerView(){
         binding.listThing.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        binding.listThing.setAdapter(new ThingListAdapter(StorageEngine.getInstance().getThings()));
     }
 }
