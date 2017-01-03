@@ -101,8 +101,7 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
         if (locationAvailability.isLocationAvailable()) {
             LocationRequest locationRequest = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(500)
-                    .setFastestInterval(60);
+                    .setInterval(5000);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         } else {
             Toast.makeText(activity, "Location Service is not available!", Toast.LENGTH_LONG).show();
