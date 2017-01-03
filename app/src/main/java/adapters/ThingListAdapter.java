@@ -3,6 +3,7 @@ package adapters;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import io.realm.RealmResults;
 import models.Thing;
 
 /**
@@ -10,6 +11,12 @@ import models.Thing;
  */
 
 public class ThingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+    RealmResults<Thing> things;
+
+    public ThingListAdapter(RealmResults<Thing> things){
+        this.things = things;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
