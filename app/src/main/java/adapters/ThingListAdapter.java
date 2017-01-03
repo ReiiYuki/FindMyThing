@@ -9,15 +9,15 @@ import models.Thing;
  * Created by yukir on 1/3/2017.
  */
 
-public class ThingListAdapter extends RecyclerView.Adapter<Thing>{
+public class ThingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
-    public Thing onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
     }
 
     @Override
-    public void onBindViewHolder(Thing holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
     }
 
@@ -25,5 +25,4 @@ public class ThingListAdapter extends RecyclerView.Adapter<Thing>{
     public int getItemCount() {
         return 0;
     }
-    
 }
