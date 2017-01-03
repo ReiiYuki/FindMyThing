@@ -8,6 +8,8 @@ import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +36,15 @@ public class HomeFragment extends Fragment implements Observer{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
+        initDataBinding(inflater,container);
+        setupRecyclerView();
         bindingToObserve();
         addListener();
         return binding.getRoot();
+    }
+
+    private void initDataBinding(LayoutInflater inflater, ViewGroup container){
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
     }
 
     private void bindingToObserve(){
@@ -82,5 +89,9 @@ public class HomeFragment extends Fragment implements Observer{
                 }
             });
         builder.create().show();
+    }
+    private void setupRecyclerView(){
+        binding.listThing.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
 }
