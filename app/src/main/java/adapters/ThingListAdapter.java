@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import engines.LocationEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.CardThingBinding;
 import io.realm.RealmResults;
@@ -31,7 +32,10 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
 
     @Override
     public void onBindViewHolder(ThingViewHolder holder, int position) {
-        holder.getBinding().thingNameText.setText(things.get(position).getName());
+        Thing thing = things.get(position);
+        holder.getBinding().thingNameText.setText(thing.getName());
+        holder.getBinding().distanceText.setText(LocationEngine.getInstance().calculateDistance(thing)+"");
+        holder.getBinding().currentLocationText.setText("("+thing.getLatitude()+","+thing.getLongitude()+")");
     }
 
     @Override

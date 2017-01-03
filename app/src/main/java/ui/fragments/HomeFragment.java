@@ -31,6 +31,7 @@ import io.github.reiiyuki.findmything.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment implements Observer{
 
     private FragmentHomeBinding binding;
+    private ThingListAdapter adapter;
 
     public HomeFragment() {}
 
@@ -59,6 +60,7 @@ public class HomeFragment extends Fragment implements Observer{
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             binding.currentLocationText.setText(String.format("(%f,%f)",latitude,longitude));
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -93,6 +95,7 @@ public class HomeFragment extends Fragment implements Observer{
     }
     private void setupRecyclerView(){
         binding.listThing.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.listThing.setAdapter(new ThingListAdapter(StorageEngine.getInstance().getThings()));
+        adapter = new ThingListAdapter(StorageEngine.getInstance().getThings());
+        binding.listThing.setAdapter(adapter);
     }
 }

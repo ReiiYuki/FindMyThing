@@ -45,4 +45,5 @@ public class Thing extends RealmObject{
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
 }

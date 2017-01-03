@@ -19,6 +19,8 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.Observable;
 
+import models.Thing;
+
 /**
  * Created by yukir on 1/3/2017.
  */
@@ -28,6 +30,7 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
     private GoogleApiClient apiClient;
     private Activity activity;
     private static LocationEngine locationEngine;
+    private final double RADIUS_OF_EARTH = 6371;
 
     private LocationEngine(){}
 
@@ -98,11 +101,22 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
         if (locationAvailability.isLocationAvailable()) {
             LocationRequest locationRequest = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(1000)
-                    .setFastestInterval(500);
+                    .setInterval(500)
+                    .setFastestInterval(60);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         } else {
             Toast.makeText(activity, "Location Service is not available!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public double calculateDistance(Thing thing){
+        Location location = getCurrentLocation();
+        if (location==null) return -99;
+        double deltaLatitude = Math.abs(Math.toRadians(location.getLatitude()-thing.getLatitude()));
+        double deltaLongitude = Math.abs(Math.toRadians(location.getLongitude()-thing.getLongitude()));
+        double a = Math.pow(Math.sin(deltaLatitude/2),2)+Math.cos(Math.toRadians(location.getLatitude())*Math.cos(Math.toRadians(thing.getLatitude())))*Math.pow(Math.sin(deltaLongitude/2),2);
+        double c = 2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+        double d = RADIUS_OF_EARTH*c;
+        return d*100;
     }
 }
