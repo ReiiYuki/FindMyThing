@@ -1,6 +1,9 @@
 package ui.fragments;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import java.util.Observer;
 
 import engines.LocationEngine;
 import io.github.reiiyuki.findmything.R;
+import io.github.reiiyuki.findmything.databinding.DialogAddThingBinding;
 import io.github.reiiyuki.findmything.databinding.FragmentHomeBinding;
 
 /**
@@ -30,6 +34,7 @@ public class HomeFragment extends Fragment implements Observer{
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false);
         bindingToObserve();
+        addListener();
         return binding.getRoot();
     }
 
@@ -45,5 +50,33 @@ public class HomeFragment extends Fragment implements Observer{
             double longitude = location.getLongitude();
             binding.currentLocationText.setText(String.format("(%f,%f)",latitude,longitude));
         }
+    }
+
+    private void addListener(){
+        binding.addThingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddThingDialogBox();
+            }
+        });
+    }
+
+    private void showAddThingDialogBox(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        DialogAddThingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),R.layout.dialog_add_thing,null,false);
+        builder.setView(binding.getRoot())
+            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            })
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        builder.create().show();
     }
 }
