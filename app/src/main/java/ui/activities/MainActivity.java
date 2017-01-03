@@ -10,6 +10,7 @@ import android.os.Bundle;
 import engines.LocationEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.ActivityMainBinding;
+import io.realm.Realm;
 import ui.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity  {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDataBinding();
+        initRealm();
         setupLocationEngine();
         initIntent();
         initFragment();
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity  {
         locationEngine = LocationEngine.getInstance();
         locationEngine.setActivity(this);
         locationEngine.buildApi();
+    }
+
+    private void initRealm(){
+        Realm.init(this);
     }
 
     @Override
