@@ -34,7 +34,7 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
     public void onBindViewHolder(ThingViewHolder holder, int position) {
         Thing thing = things.get(position);
         holder.getBinding().thingNameText.setText(thing.getName());
-        holder.getBinding().distanceText.setText(LocationEngine.getInstance().calculateDistance(thing)+"");
+        holder.getBinding().distanceText.setText("Less than "+Math.round(LocationEngine.getInstance().calculateDistance(thing))+" m");
         holder.getBinding().currentLocationText.setText("("+thing.getLatitude()+","+thing.getLongitude()+")");
     }
 

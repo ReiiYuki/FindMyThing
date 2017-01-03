@@ -1,11 +1,13 @@
 package ui.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import engines.LocationEngine;
 import io.github.reiiyuki.findmything.R;
@@ -76,4 +78,19 @@ public class MainActivity extends AppCompatActivity  {
         locationEngine.disconnect();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 123: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    LocationEngine.getInstance().startLocationAvailability();
+
+                } else {
+                    Toast.makeText(this, "Permission Denied!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
 }

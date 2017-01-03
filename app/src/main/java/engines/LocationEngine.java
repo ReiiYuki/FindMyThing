@@ -90,7 +90,7 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
         }
     }
 
-    private void startLocationAvailability(){
+    public void startLocationAvailability(){
         if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions(activity,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -101,7 +101,7 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
         if (locationAvailability.isLocationAvailable()) {
             LocationRequest locationRequest = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(5000);
+                    .setInterval(500);
             LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
         } else {
             Toast.makeText(activity, "Location Service is not available!", Toast.LENGTH_LONG).show();
@@ -116,6 +116,6 @@ public class LocationEngine extends Observable implements GoogleApiClient.Connec
         double a = Math.pow(Math.sin(deltaLatitude/2),2)+Math.cos(Math.toRadians(location.getLatitude())*Math.cos(Math.toRadians(thing.getLatitude())))*Math.pow(Math.sin(deltaLongitude/2),2);
         double c = 2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
         double d = RADIUS_OF_EARTH*c;
-        return d*100;
+        return d*1000;
     }
 }
