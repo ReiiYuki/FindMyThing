@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment implements Observer{
                 public void onClick(DialogInterface dialog, int which) {
                     String name = binding.thingNameText.getText().toString();
                     StorageEngine.getInstance().addThing(name);
-                    Toast.makeText(getContext(),"You have "+StorageEngine.getInstance().getThings().size(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"You have "+StorageEngine.getInstance().getThings().last().getName(),Toast.LENGTH_LONG).show();
                 }
             });
         builder.create().show();

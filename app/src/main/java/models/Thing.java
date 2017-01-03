@@ -11,17 +11,8 @@ public class Thing extends RealmObject{
     @PrimaryKey
     private long id;
     private String name;
-    private String description;
     private double latitude;
     private double longitude;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public long getId() {
         return id;
