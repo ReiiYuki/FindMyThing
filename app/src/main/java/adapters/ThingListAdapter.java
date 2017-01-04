@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import engines.LocationEngine;
+import engines.StorageEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.CardThingBinding;
 import io.realm.RealmResults;
@@ -56,7 +57,7 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
         return things.size();
     }
 
-    public void showOptionBox(int position){
+    public void showOptionBox(final int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(things.get(position).getName())
                 .setItems(OPTIONS, new DialogInterface.OnClickListener() {
@@ -67,7 +68,7 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
                         }else if (which==1){
 
                         }else if (which==2){
-
+                            StorageEngine.getInstance().deleteThing(position);
                         }
                     }
                 });

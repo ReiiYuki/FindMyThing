@@ -42,4 +42,13 @@ public class StorageEngine {
     public RealmResults<Thing> getThings(){
         return realm.where(Thing.class).findAll();
     }
+
+    public void deleteThing(final int position){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                getThings().get(position).deleteFromRealm();
+            }
+        });
+    }
 }
