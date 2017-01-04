@@ -60,4 +60,14 @@ public class StorageEngine {
             }
         });
     }
+
+    public void relocateThing(final int position){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                getThings().get(position).setLatitude(LocationEngine.getInstance().getCurrentLocation().getLatitude());
+                getThings().get(position).setLongitude(LocationEngine.getInstance().getCurrentLocation().getLongitude());
+            }
+        });
+    }
 }

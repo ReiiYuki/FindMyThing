@@ -67,9 +67,8 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
                     public void onClick(DialogInterface dialog, int which) {
                         if (which==0) {
                             showChangeNameBox(position);
-                            dialog.cancel();
                         }else if (which==1){
-
+                            StorageEngine.getInstance().relocateThing(position);
                         }else if (which==2){
                             StorageEngine.getInstance().deleteThing(position);
                         }
