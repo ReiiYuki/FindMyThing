@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import engines.LocationEngine;
 import engines.StorageEngine;
 import io.github.reiiyuki.findmything.R;
 import io.github.reiiyuki.findmything.databinding.CardThingBinding;
+import io.github.reiiyuki.findmything.databinding.DialogAddThingBinding;
 import io.realm.RealmResults;
 import models.Thing;
 import viewholders.ThingViewHolder;
@@ -64,12 +66,34 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which==0) {
-
+                            showChangeNameBox(position);
+                            dialog.cancel();
                         }else if (which==1){
 
                         }else if (which==2){
                             StorageEngine.getInstance().deleteThing(position);
                         }
+                    }
+                });
+        builder.create().show();
+    }
+
+    public void showChangeNameBox(final int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final DialogAddThingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity),R.layout.dialog_add_thing,null,false);
+        binding.thingNameText.setText(StorageEngine.getInstance().getThings().get(position).getName());
+        builder.setView(binding.getRoot())
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String name = binding.thingNameText.getText().toString();
+                        StorageEngine.getInstance().editThingName(position,name);
                     }
                 });
         builder.create().show();

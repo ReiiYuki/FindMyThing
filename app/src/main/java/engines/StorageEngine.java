@@ -51,4 +51,13 @@ public class StorageEngine {
             }
         });
     }
+
+    public void editThingName(final int position, final String name){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                getThings().get(position).setName(name);
+            }
+        });
+    }
 }
