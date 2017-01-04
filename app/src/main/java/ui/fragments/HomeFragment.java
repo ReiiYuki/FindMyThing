@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements Observer{
     }
     private void setupRecyclerView(){
         binding.listThing.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ThingListAdapter(StorageEngine.getInstance().getThings());
+        adapter = new ThingListAdapter(getActivity(),StorageEngine.getInstance().getThings());
         binding.listThing.setAdapter(adapter);
     }
 }

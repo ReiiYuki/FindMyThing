@@ -1,8 +1,12 @@
 package adapters;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import engines.LocationEngine;
@@ -18,9 +22,12 @@ import viewholders.ThingViewHolder;
 
 public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
 
-    RealmResults<Thing> things;
+    private RealmResults<Thing> things;
+    private Activity activity;
+    private final String[] OPTIONS = {"Change Thing's name","Update location to current location","Delete Thing"};
 
-    public ThingListAdapter(RealmResults<Thing> things){
+    public ThingListAdapter(Activity activity,RealmResults<Thing> things){
+        this.activity = activity;
         this.things = things;
     }
 
@@ -31,15 +38,39 @@ public class ThingListAdapter extends RecyclerView.Adapter<ThingViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ThingViewHolder holder, int position) {
+    public void onBindViewHolder(ThingViewHolder holder, final int position) {
         Thing thing = things.get(position);
         holder.getBinding().thingNameText.setText(thing.getName());
         holder.getBinding().distanceText.setText("Less than "+Math.round(LocationEngine.getInstance().calculateDistance(thing))+" m");
         holder.getBinding().currentLocationText.setText("("+thing.getLatitude()+","+thing.getLongitude()+")");
+        holder.getBinding().getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionBox(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return things.size();
+    }
+
+    public void showOptionBox(int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(things.get(position).getName())
+                .setItems(OPTIONS, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which==0) {
+
+                        }else if (which==1){
+
+                        }else if (which==2){
+
+                        }
+                    }
+                });
+        builder.create().show();
     }
 }
